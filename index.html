@@ -136,8 +136,7 @@
 
                         <div class="mb-3">
                             <label for="benefits" class="form-label">Benefits</label>
-                            <input type="text" class="form-control" required id="benefit"
-                                placeholder="Yaxshi tomonlari">
+                            <input type="text" class="form-control" id="benefit" placeholder="Yaxshi tomonlari">
 
                             <ul class="d-flex flex-wrap list-unstyled mt-3 gap-2" id="benefitsExample">
 
@@ -173,16 +172,14 @@
                         <div class="mb-3">
                             <label for="product-manufacturer" class="form-label">Manufacturer</label>
                             <select class="form-select" required id="edit-product__manufacturer">
-                                <option selected disabled value="0" class="productManufacturers">Select a manufacturer
-                                </option>
+                                <option value="" class="productManufacturers">Select a manufacturer</option>
                                 <!-- manufacturers array bu yerga kelishi kerak -->
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label for="benefits" class="form-label">Benefits</label>
-                            <input type="text" class="form-control" id="edit-benefit" required
-                                placeholder="Yaxshi tomonlari">
+                            <input type="text" class="form-control" id="edit-benefit" placeholder="Yaxshi tomonlari">
 
                             <ul class="d-flex flex-wrap list-unstyled mt-3 gap-2" id="edit-benefits-example">
 
@@ -194,6 +191,43 @@
             </div>
         </div>
     </div>
+
+    <template id="product-template">
+
+        <li class="col-4">
+            <div class="card"><img class="card-img-top" src="https://picsum.photos/300/200">
+                <div class="card-body">
+                    <h3 class="card-title"></h3>
+                    <!--Product Title-->
+                    <p class="card-text fw-bold"><mark class="product__discount-price-mark"></mark></p>
+                    <!--product discount Price-->
+                    <p class="card-text"><s class="product__original-price"></s></p>
+                    <!--product price-->
+                    <p class="badge bg-success product__manufacturer-name"></p>
+                    <!--product manufacturer name-->
+                    <p class="card-text product__added-date"></p>
+                    <!--product added date-->
+                    <ul class="d-flex flex-wrap list-unstyled benefits__list">
+                        <!--product benefits list-->
+
+                    </ul>
+                    <div class="position-absolute top-0 end-0 d-flex">
+                        <!--product edit and delete button-->
+
+                        <button class="btn rounded-0 btn-secondary edit-button" data-bs-toggle="modal"
+                            data-bs-target="#edit-product-modal">
+                            <i class="fa-solid fa-pen" style="pointer-events: none;"></i>
+                        </button>
+
+                        <button class="btn rounded-0 btn-danger delete-button">
+                            <i class="fa-solid fa-trash" style="pointer-events: none;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+    </template>
 
     <script src="js/bootstrap.bundle.min.js"></script>
 
