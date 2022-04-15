@@ -1,9 +1,9 @@
 const PRODUCT = document.querySelector(".products");
 
-const localStorage = function(){
-    const lStorage = localStorage.setItem("products", JSON.stringify(products));
+const localStorageSet = function(){
+    const localStorageJson = localStorage.setItem("products", JSON.stringify(products));
 
-    return lStorage
+    return localStorageJson
 }
 
 const addZero = function (number) {
@@ -30,7 +30,7 @@ const addElement = function (tagName, className, content) {
     return addedElement
 }
 
-// const localStorageJson = localStorage.setItem("products", JSON.stringify(products)); // "products" bu key JSON.stringify(products) bu value JSON.stringify()bu array ni string formatga otkazib beradi.
+
 
 const renderProduct = function (product) {
     const {
@@ -67,7 +67,7 @@ const renderProduct = function (product) {
     return productItem
 }
 
-let showProduct = products
+let showProduct = products.slice()
 const productCount = document.querySelector("#products-count");
 
 const refreshProduct = function () {
@@ -82,6 +82,8 @@ const refreshProduct = function () {
         const productItem = renderProduct(productArray);
         ProductFragment.append(productItem);
     });
+
+    localStorageSet()
 
     PRODUCT.append(ProductFragment)
 
@@ -215,6 +217,8 @@ addProductForm.addEventListener("submit", function (evt) {
 
         refreshProduct()
 
+        localStorageSet()
+
         HideMOdal.hide()
 
         benefitsOptions = [];
@@ -225,7 +229,7 @@ addProductForm.addEventListener("submit", function (evt) {
 const editTitle = editProductForm.querySelector("#edit-title");
 const editPrice = editProductForm.querySelector("#edit-product__price");
 const editManufacturer = editProductForm.querySelector("#edit-product__manufacturer");
-// const editBenefitInput = editProductForm.querySelector("#edit-benefit")
+const editBenefitInput = editProductForm.querySelector("#edit-benefit")
 
 
 PRODUCT.addEventListener("click", function (evt) {
@@ -238,6 +242,8 @@ PRODUCT.addEventListener("click", function (evt) {
 
         showProduct.splice(productItemIndex, 1);
         products.splice(productItemIndex, 1);
+
+        localStorageSet()
 
         refreshProduct()
     } else if (evt.target.matches(".edit-button")) {
@@ -256,14 +262,13 @@ PRODUCT.addEventListener("click", function (evt) {
         editManufacturer.value = editProductElements.model;
         benefitsOptions = products[editProductItemIndex].benefits
 
-        console.log(benefitsOptions);
 
-        const editBenefitsList = editProductForm.querySelector("#edit-benefits-example");
-        benefitsOptions.forEach(function (editBenefitsArray) {
-            const specsItem = addElement("li", "me-1 mb-1 benefit-livbtn btn-sm badge rounded-pill btn-danger mr-5 benefit-btn", editBenefitsArray);
+        // const editBenefitsList = editProductForm.querySelector("#edit-benefits-example");
+        // benefitsOptions.forEach(function (editBenefitsArray) {
+        //     const specsItem = addElement("li", "me-1 mb-1 benefit-livbtn btn-sm badge rounded-pill btn-danger mr-5 benefit-btn", editBenefitsArray);
 
-            editBenefitsList.append(specsItem);
-        });
+        //     editBenefitsList.append(specsItem);
+        // });
 
         benefitsOptions = []
 
@@ -282,9 +287,7 @@ editProductForm.addEventListener("submit", function (evt) {
     const editedPrice = editPrice.value;
     const editedManufacturer = editManufacturer.value;
     const hasBenefits = benefitsOptions.length !== 0
-    console.log(editedTitle);
-    console.log(editedPrice);
-    console.log(editedManufacturer);
+    
     if (editedTitle.trim() && editedPrice.trim()) {
 
         const editProduct = {
@@ -304,6 +307,8 @@ editProductForm.addEventListener("submit", function (evt) {
 
         showProduct.splice(editedItemIndex, 1, editProduct);
         products.splice(editedItemIndex, 1, editProduct);
+
+        localStorageSet()
 
         editProductForm.reset();
 
